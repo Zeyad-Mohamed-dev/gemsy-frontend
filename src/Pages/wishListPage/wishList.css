@@ -1,0 +1,194 @@
+/* ============ PAGINATION ============ */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 0.5rem;
+}
+
+.pagination-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: white;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-btn.active {
+  background-color: #dd0303;
+  color: white;
+  border-color: #dd0303;
+  font-weight: 600;
+}
+
+.pagination-ellipsis {
+  padding: 0.5rem;
+  color: #6b7280;
+}
+
+/* ============ CARDS & ANIMATIONS ============ */
+.wishlist-grid {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.wishlist-empty-state {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.wishlist-item-enter {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.wishlist-card:hover {
+  transform: translateY(-4px);
+  transition: transform 0.2s ease;
+}
+
+/* ============ DARK MODE ============ */
+
+/* Page Background */
+.dark-mode .wishlist-page {
+  background-color: var(--dm-bg);
+}
+
+/* Text Colors */
+.dark-mode .wishlist-title,
+.dark-mode .wishlist-count-text,
+.dark-mode .wishlist-empty-title {
+  color: var(--dm-text);
+}
+
+.dark-mode .wishlist-back-link,
+.dark-mode .wishlist-empty-subtitle,
+.dark-mode .wishlist-pagination-info,
+.dark-mode .wishlist-footer-info,
+.dark-mode .wishlist-footer-subinfo,
+.dark-mode .pagination-ellipsis {
+  color: var(--dm-subtext);
+}
+
+/* Hover effect for back link */
+.dark-mode .wishlist-back-link:hover {
+  color: #dd0303;
+}
+
+/* Count Badge */
+.dark-mode .wishlist-count-badge {
+  background-color: var(--dm-card-bg);
+  border: 1px solid #3f3f46; /* Zinc-700 */
+}
+
+/* Clear Buttons */
+.dark-mode .wishlist-clear-header-btn,
+.dark-mode .wishlist-clear-footer-btn {
+  background-color: rgba(220, 38, 38, 0.1); /* Red-900/10 */
+  color: #ef4444; /* Red-500 */
+}
+
+.dark-mode .wishlist-clear-header-btn:hover,
+.dark-mode .wishlist-clear-footer-btn:hover {
+  background-color: rgba(127, 29, 29, 0.3); /* Red-900/30 */
+  color: #f87171; /* Red-400 */
+}
+
+/* Empty State Icon Circle */
+.dark-mode .wishlist-empty-icon-circle {
+  background-color: var(--dm-card-bg);
+}
+
+.dark-mode .wishlist-empty-icon {
+  color: var(--dm-subtext);
+}
+
+/* Explore Button (Black BG, White Text, White Border) */
+.dark-mode .wishlist-explore-btn {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+
+.dark-mode .wishlist-explore-btn:hover {
+  background-color: #dd0303 !important;
+  border-color: #dd0303 !important;
+}
+
+/* Home Button (White BG, Black Text) */
+.dark-mode .wishlist-home-btn {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #e5e7eb !important;
+}
+
+.dark-mode .wishlist-home-btn:hover {
+  background-color: #dd0303 !important;
+  color: #ffffff !important;
+  border-color: #dd0303 !important;
+}
+
+/* Cards */
+.dark-mode .wishlist-card {
+  background: var(--dm-card-bg);
+  border: 1px solid #2d3748;
+}
+
+/* Pagination Buttons */
+.dark-mode .pagination-btn {
+  background-color: var(--dm-card-bg);
+  border-color: #3f3f46;
+  color: var(--dm-text);
+}
+
+.dark-mode .pagination-btn:hover:not(:disabled) {
+  background-color: #3f3f46;
+}
+
+.dark-mode .pagination-btn:disabled {
+  opacity: 0.5;
+}
+
+.dark-mode .pagination-btn.active {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Divider */
+.dark-mode .wishlist-footer-divider {
+  border-color: #3f3f46;
+}

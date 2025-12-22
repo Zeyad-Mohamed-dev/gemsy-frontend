@@ -1,0 +1,55 @@
+{
+  "header": {
+    "hiddenGemsManagement": "إدارة الجواهر المخفية",
+    "totalGemsFound": "تم العثور على {{totalItems}} جوهرة"
+  },
+  "buttons": {
+    "addHiddenGem": "إضافة جوهرة مخفية",
+    "clearAllFilters": "مسح كل الفلاتر",
+    "cancel": "إلغاء",
+    "delete": "حذف"
+  },
+  "inputs": {
+    "searchGems": "ابحث عن الجواهر..."
+  },
+  "filters": {
+    "allCategories": "كل الفئات",
+    "allStatus": "كل الحالات",
+    "sortBy": "ترتيب حسب"
+  },
+  "status": {
+    "pending": "قيد الانتظار",
+    "accepted": "مقبول",
+    "rejected": "مرفوض"
+  },
+  "sort": {
+    "nameAZ": "الاسم (أ-ي)",
+    "nameZA": "الاسم (ي-أ)",
+    "highestRating": "أعلى تقييم",
+    "lowestRating": "أدنى تقييم",
+    "oldestFirst": "الأقدم أولاً",
+    "newestFirst": "الأحدث أولاً"
+  },
+  "table": {
+    "gem": "الجوهرة",
+    "category": "الفئة",
+    "rating": "التقييم",
+    "status": "الحالة",
+    "actions": "الإجراءات",
+    "noGemsFound": "لم يتم العثور على جوهرة",
+    "noImage": "لا توجد صورة"
+  },
+  "modals": {
+    "deleteGem": "حذف الجوهرة",
+    "confirmDelete": "هل أنت متأكد أنك تريد حذف هذه الجوهرة المخفية؟",
+    "cannotUndo": "لا يمكن التراجع عن هذا الإجراء."
+  },
+  "toast": {
+    "failedToLoadGems": "فشل في تحميل الجواهر",
+    "gemDeleted": "تم حذف الجوهرة بنجاح",
+    "failedToDeleteGem": "فشل في حذف الجوهرة"
+  },
+  "pagination": {
+    "showingPage": "عرض الصفحة {{currentPage}} من {{totalPages}}"
+  }
+}

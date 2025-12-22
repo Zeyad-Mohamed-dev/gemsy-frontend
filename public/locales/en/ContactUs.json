@@ -1,0 +1,33 @@
+{
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Got a question or want to reach out? We're always here.",
+    "office-title": "Where Are We?",
+    "office-desc": "We're everywhere — fully online!\nWherever there's Wi-Fi, that's our office.",
+    "phone-title": "Need Help?",
+    "phone-desc": "We usually reply faster on email 😉",
+    "email-title": "Email",
+    "email-desc": "hiddengemsy@gmail.com",
+    "form-title": "Send us a message",
+    "form-subtitle": "Share your thoughts — we reply within 24 hours.",
+    "first-name": "First Name",
+    "last-name": "Last Name",
+    "email": "Email Address",
+    "message": "Your Message",
+    "send-btn": "Send Message",
+    "sending": "Sending...",
+    "sent-success": "Message sent successfully!",
+    "sent-failed": "Failed to send message. Try again.",
+    "validation-error": "Please correct the errors before submitting.",
+    "errors": {
+      "firstName": "First name is required",
+      "firstName-short": "First name must be at least 2 characters",
+      "lastName": "Last name is required",
+      "lastName-short": "Last name must be at least 2 characters",
+      "email": "Email is required",
+      "email-invalid": "Invalid email format",
+      "message": "Message is required",
+      "message-short": "Message must be at least 10 characters"
+    }
+  }
+}

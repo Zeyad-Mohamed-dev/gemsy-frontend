@@ -1,0 +1,27 @@
+{
+  "title": "Welcome Back",
+  "subtitle": "Sign in to your account",
+  "Home": "Back to Home",
+  "arrow": "<<",
+
+  "email-placeholder": "Enter your email",
+
+  "email-label": "Email",
+  "email-error": "Email is required",
+
+  "password-label": "Password",
+  "password-placeholder": "Enter your password",
+  "password-error": "Password is required",
+  "Login-button": "Login",
+  "hr": "Or",
+  "link-google": "Continue with Google",
+  "text-signup": "Don't have an account?",
+  "link-signup": "Create new account",
+  "text-forgot-password": "don't remember your password?",
+  "link-forgot-password": "Forgot Password?",
+
+  "Toaster-error": "Email or password is incorrect",
+  "Toaster-success": "Logged in successfully!",
+  "SignOut-button": "Sign Out",
+  "signed-out-successfully": "Signed out successfully!"
+}
