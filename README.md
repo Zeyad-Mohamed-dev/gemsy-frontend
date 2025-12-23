@@ -1,16 +1,95 @@
-# React + Vite
+# Hidden Gems Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hidden Gems is a platform designed to help users discover unique and interesting places ("gems") in their cities. It connects users with local businesses and offers features for finding, reviewing, and sharing these hidden spots. The platform supports multiple roles including Users, Business Owners, and Administrators.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Accounts**: Sign up, login (including Google OAuth), and profile management.
+- **Roles & Permissions**: Distinct dashboards and features for Users, Owners, and Admins.
+- **Discover Places**: Interactive map search and categorized lists of places.
+- **Wishlist**: Save favorite gems for later.
+- **Business Management**: Owners can add and manage their business listings ("Gems") and vouchers.
+- **Vouchers & Transactions**: Redeemable vouchers and transaction tracking.
+- **Social Features**: Reviews, ratings, and "Created by You" lists.
+- **Internationalization (i18n)**: Support for multiple languages (English/Arabic) with RTL/LTR layout.
+- **Dark Mode**: Built-in dark/light theme capability.
+- **Responsive Design**: Mobile-friendly layout for all devices.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project is built with a modern React stack:
 
-## Expanding the ESLint configuration
+### Core
+- **[React](https://react.dev/)**: JavaScript library for building user interfaces.
+- **[Vite](https://vitejs.dev/)**: Next Generation Frontend Tooling for fast builds and HMR.
+- **[Redux Toolkit](https://redux-toolkit.js.org/)**: State management for the application.
+- **[React Router](https://reactrouter.com/)**: Client-side routing.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### UI & Styling
+- **[Tailwind CSS](https://tailwindcss.com/)**: A utility-first CSS framework.
+- **[Material UI (MUI)](https://mui.com/)**: React UI components.
+- **[Framer Motion](https://www.framer.com/motion/)** & **[GSAP](https://greensock.com/gsap/)**: For smooth animations.
+- **[Lucide React](https://lucide.dev/)**: Beautiful & consistent icons.
+
+### Maps
+- **[Leaflet](https://leafletjs.com/)** & **[React Leaflet](https://react-leaflet.js.org/)**: Interactive maps for finding gems.
+
+### Forms & Validation
+- **[React Hook Form](https://react-hook-form.com/)**: Performant, flexible and extensible forms.
+- **[Zod](https://zod.dev/)**: TypeScript-first schema declaration and validation.
+
+### Other Tools
+- **Axios**: HTTP client for API requests.
+- **i18next**: Internationalization framework.
+- **React Hot Toast** & **Sonner**: For toast notifications.
+
+## Getting Started
+
+Follow these steps to set up the project locally.
+
+### Prerequisites
+- Node.js (v16 or higher recommended)
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd hidden-gems-frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Variables**
+   Create a `.env` file in the root directory and add the necessary environment variables. You can reference `.env.example` if available.
+   Example:
+   ```env
+   VITE_CLIENT_ID=your_google_client_id
+   # Add other API endpoints or keys here
+   ```
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+## Scripts
+
+- `npm run dev`: Starts the development server.
+- `npm run build`: Builds the app for production.
+- `npm run lint`: Runs ESLint to check for code quality issues.
+- `npm run preview`: Preview the production build locally.
+
+## Project Structure
+
+- `src/Components`: Reusable UI components.
+- `src/Pages`: Page components corresponding to routes.
+- `src/redux`: Redux slices and store configuration.
+- `src/Services`: API service functions.
+- `src/assets`: Static assets like images and fonts.
+- `src/utils`: Helper functions and utilities.
+- `src/config`: App configuration files.
