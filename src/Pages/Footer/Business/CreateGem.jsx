@@ -1,3 +1,4 @@
+import LocationPicker from "@/Components/location/LocationPicker";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -149,6 +150,10 @@ const CreateGem = ({ onGemCreated }) => {
             {errors.gemLocation && (
               <p className="text-red-500 text-xs mt-1">{errors.gemLocation}</p>
             )}
+          </div>
+
+          <div>
+            <LocationPicker />
           </div>
 
           <div>
