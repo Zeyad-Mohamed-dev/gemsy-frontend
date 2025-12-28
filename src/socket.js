@@ -5,7 +5,8 @@ let socket;
 export const initSocket = (userId) => {
     if(socket) return socket;
     socket= io(import.meta.env.VITE_Base_URL, {
-        query: { userId}
+        query: { userId},
+        reconnectionAttempts: 3
     })
     return socket;
 }
