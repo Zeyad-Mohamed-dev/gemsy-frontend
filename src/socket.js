@@ -7,7 +7,8 @@ export const initSocket = (userId) => {
     socket= io(import.meta.env.VITE_Base_URL, {
         query: { userId},
         reconnectionAttempts: 3,
-        timeout: 10000
+        timeout: 10000,
+        transports: ["websocket"]
     })
     return socket;
 }
