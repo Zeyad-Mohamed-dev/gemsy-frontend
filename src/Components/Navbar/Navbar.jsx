@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { Menu, X, Search, User, Moon, Sun, Star } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDarkMode } from "../../redux/darkModeSlice";
-import { logoutUser } from "../../redux/userSlice";
+import { logoutUser, updateUserPoints } from "../../redux/userSlice";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import { useTranslation } from "react-i18next";
@@ -11,6 +11,9 @@ import TranslateTwoToneIcon from "@mui/icons-material/TranslateTwoTone";
 import { Link as LinkScroll, scroller } from "react-scroll";
 import { Heart } from "lucide-react";
 import { fetchWishlistCount } from "../../redux/wishlistSlice";
+import { io } from "socket.io-client";
+import { init } from "i18next";
+import { disconnectSocket, initSocket } from "@/socket";
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
@@ -32,10 +35,24 @@ export default function Navbar() {
   const handleDarkToggle = () => dispatch(toggleDarkMode());
 
 
-useEffect(()=>{
-console.log("user",user);
+  // useEffect(() => {
+  //   const socket = new io(import.meta.env.VITE_Base_URL);
+  // })
 
-},[])
+  useEffect(() => {
+    console.log("listening effect fired");
+    if(isloggedin) {
+      const socket = initSocket(user.id);
+      socket.on("pointsUpdated", (data) => {
+        dispatch(updateUserPoints(data.newPoints));
+      })
+    }
+
+    return () => {
+      // console.log("disconnecting socket");
+      // disconnectSocket();
+    }
+  }, [isloggedin])
 
 
   // Sticky navbar on scroll
@@ -167,7 +184,7 @@ console.log("user",user);
           <li>
             <NavLink to="/sponsored" className="flex items-center gap-1">
               <Star size={14} fill="#FFD700" color="#FFD700" />
-               {t("nav_link_sponsored")}
+              {t("nav_link_sponsored")}
               <Star size={14} fill="#FFD700" color="#FFD700" />
             </NavLink>
           </li>
@@ -186,9 +203,6 @@ console.log("user",user);
           <li>
             <NavLink to="/contact-us">{t("nav_link_contact")}</NavLink>
           </li>
-          <li>
-            <NavLink to="/about/aboutUS">{t("nav_link_about")}</NavLink>
-          </li>
         </ul>
 
         <div className="navbar-actions">
@@ -204,27 +218,27 @@ console.log("user",user);
               </Link>
 
               {isloggedin && (
-             <div
-  onClick={() => navigate("/profile")}
-  className={`
-    flex items-center cursor-pointer transition
-    gap-1 md:gap-2
-    px-2 py-1 md:px-4 md:py-2
-    rounded-xl md:rounded-full
-    shadow-md
-    ${dark ? "bg-black text-white" : "bg-white text-black"}
-  `}
->
-    <Star
+                <div
+                  onClick={() => navigate("/profile")}
+                  className={`
+                    flex items-center cursor-pointer transition
+                    gap-1 md:gap-2
+                    px-2 py-1 md:px-4 md:py-2
+                    rounded-xl md:rounded-full
+                    shadow-md
+                    ${dark ? "bg-black text-white" : "bg-white text-black"}
+                  `}
+                >
+                  {/* points display */}
+                  <Star
                     size={12}
                     fill={dark ? "#ffffff" : "#000000"}
                     color={dark ? "#ffffff" : "#000000"}
                   />
-  <span className="font-bold text-xs md:text-sm">
-    {user?.points?.toLocaleString() || "0"}
-  </span>
-</div>
-
+                  <span className="font-bold text-xs md:text-sm">
+                    {user?.points?.toLocaleString() || "0"}
+                  </span>
+                </div>
               )}
             </>
           )}
@@ -271,32 +285,32 @@ console.log("user",user);
                       {t("Hi")} {user.firstName}
                     </p>
                   )}
-                  <button onClick={() => navigate("/profile")}>
+                  <button onClick={() => {setUserDropdown(false); navigate("/profile"); }}>
                     {t("Profile")}
                   </button>
                   {user && user.role !== "admin" && user.role !== "owner" && (
                     <>
-                      <button onClick={() => navigate("/vouchers")}>
+                      <button onClick={() =>{setUserDropdown(false); navigate("/vouchers")}}>
                         {t("Vouchers")}
                       </button>
-                      <button onClick={() => navigate("/transactions")}>
+                      <button onClick={() =>{setUserDropdown(false); navigate("/transactions")}}>
                         {t("Transactions")}
                       </button>
                     </>
                   )}
 
                   {user && user.role !== "admin" && user.role !== "owner" && (
-                    <button onClick={() => navigate("/created-by-you")}>
+                    <button onClick={() => {setUserDropdown(false); navigate("/created-by-you")}}>
                       {t("My Gems")}
                     </button>
                   )}
                   {user && user.role === "admin" && (
-                    <button onClick={() => navigate("/admin")}>
+                    <button onClick={() => {setUserDropdown(false); navigate("/admin")}}>
                       {t("Admin Dashboard")}
                     </button>
                   )}
                   {user && user.role === "owner" && (
-                    <button onClick={() => navigate("/owner/dashboard")}>
+                    <button onClick={() => {setUserDropdown(false); navigate("/owner/dashboard")}}>
                       {t("Owner Dashboard")}
                     </button>
                   )}
@@ -372,7 +386,7 @@ console.log("user",user);
               className="flex items-center gap-1"
             >
               <Star size={14} fill="#FFD700" color="#FFD700" />
-               {t("nav_link_sponsored")}
+              {t("nav_link_sponsored")}
               <Star size={14} fill="#FFD700" color="#FFD700" />
             </NavLink>
           </li>
@@ -393,11 +407,6 @@ console.log("user",user);
           <li>
             <NavLink to="/contact-us" onClick={() => setIsOpen(false)}>
               {t("nav_link_contact")}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/about/aboutUS" onClick={() => setIsOpen(false)}>
-              {t("nav_link_about")}
             </NavLink>
           </li>
 

@@ -4,7 +4,7 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -81,13 +81,38 @@ import AllTransactions from "./Pages/Transactions/AllTransactions/AllTransaction
 import TransactionDashboard from "./Pages/Transactions/TransactionDashboard/TransactionDashboard";
 import AllReports from "./Pages/AdminPages/Reports/AllReports/AllReports";
 import ReportDetails from "./Pages/AdminPages/Reports/ReportDetails/ReportDetails";
+import { io } from "socket.io-client";
+import { disconnectSocket, initSocket } from "./socket";
 function App() {
   const dark = useSelector((state) => state.darkMode.enabled);
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
   const language = i18n.language || "en";
   const { isLoggedIn, loading } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    if(isLoggedIn) {
+      const socket = initSocket(user.userInfo.id);
+      // const socket = io(import.meta.env.VITE_Base_URL, {
+      //   query: { userId: user.userInfo.id }
+      // });
 
+      socket.on("connect", () => {
+        console.log("✅ Successfully connected to Backend! ID:", socket.id);
+      });
+
+      socket.on("connect_error", (err) => {
+        console.error("❌ Connection Error:", err.message);
+        return;
+      });
+    }
+    
+
+    return () => {
+      // socket.disconnect();
+      disconnectSocket();
+    }
+  }, [isLoggedIn])
   // Check Auth on App load
   useEffect(() => {
     dispatch(checkAuth());
@@ -148,12 +173,12 @@ function App() {
           element: <AboutLayout />,
           children: [
             { index: true, element: <AboutUs /> },
-            { path: "aboutUS", element: <AboutUs /> },
-            { path: "careers", element: <Careers /> },
-            { path: "press", element: <Press /> },
-            { path: "terms", element: <Terms /> },
-            { path: "privacy", element: <Privacy /> },
-            { path: "content", element: <Content /> },
+            { path: "aboutUS", element: lazy( () => import('./Pages/Footer/About/AboutUs'))},
+            { path: "careers", element: lazy( () => import('./Pages/Footer/About/Careers')) },
+            { path: "press", element: lazy( () => import('./Pages/Footer/About/Press'))},
+            { path: "terms", element:lazy( () => import('./Pages/Footer/About/Terms')) },
+            { path: "privacy", element: lazy( () => import('./Pages/Footer/About/Privacy')) },
+            { path: "content", element: lazy( () => import('./Pages/Footer/About/Content')) },
           ],
         },
 

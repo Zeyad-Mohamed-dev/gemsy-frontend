@@ -48,6 +48,9 @@ const userSlice = createSlice({
       state.userInfo = null;
       state.loading = false;
       state.error = null;
+    },
+    updateUserPoints: (state, action) => {
+      state.userInfo.points =+ action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -80,5 +83,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { login, clearUser } = userSlice.actions;
+export const { login, clearUser, updateUserPoints } = userSlice.actions;
 export default userSlice.reducer;

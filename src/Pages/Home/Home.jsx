@@ -22,6 +22,7 @@ export default function Home() {
   // check direction for alignment
   const isRTL = i18n.language === "ar";
 
+ 
   useEffect(() => {
     const fetchGems = async () => {
       try {
