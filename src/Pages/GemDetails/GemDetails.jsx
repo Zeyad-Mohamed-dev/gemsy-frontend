@@ -1228,7 +1228,9 @@ const GemDetails = () => {
                   <div className="space-y-4">
                     <div className="flex items-start gap-3 text-gray-600 dark:text-gray-300">
                       <MapPin className="w-5 h-5 mt-1 text-[#DD0303]" />
-                      <span>{gem.gemLocation || "Location not available"}</span>
+                      <span className="hover:text-[#DD0303] "><a 
+                      target="_blank"
+                      href={`https://www.google.com/maps/search/?api=1&query=${gem.latitude},${gem.longitude}`}> {gem.gemLocation || "Location not available"}</a></span>
                     </div>
                     {gem?.gemPhone && (
                       <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">

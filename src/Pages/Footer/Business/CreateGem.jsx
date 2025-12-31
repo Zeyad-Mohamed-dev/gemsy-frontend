@@ -15,8 +15,16 @@ const CreateGem = ({ onGemCreated }) => {
     gemPhone: "",
     category: "",
     images: [],
+    position: { lat: 30.0444, lng: 31.2357 }
   });
+  const handlePositionChange = (position) => {
+    setFormData({...formData, position});
+  }
 
+  const handleGemLocation = (location) => {
+    setFormData({...formData, gemLocation: location});
+  }
+  const [loading, setLoading] = useState(false);
   // Fetch Categories
   useEffect(() => {
     async function fetchCategories() {
@@ -57,6 +65,9 @@ const CreateGem = ({ onGemCreated }) => {
     if (formData.gemPhone && !/^01[0125][0-9]{8}$/.test(formData.gemPhone)) {
       newErrors.gemPhone = "Invalid Phone Number";
     }
+    if(formData.position.lat === 30.0444 && formData.position.lng === 31.2357) {
+      newErrors.position = "Please select a location on the map";
+    }
     setErrors(newErrors);
     return newErrors;
   };
@@ -81,11 +92,14 @@ const CreateGem = ({ onGemCreated }) => {
       dataToSend.append("category", formData.category);
       dataToSend.append("status", "pending");
       dataToSend.append("description", "kalaaam to be removed"); ////
+      dataToSend.append("lat", parseFloat(formData.position.lat));
+      dataToSend.append("lng", parseFloat(formData.position.lng));
       // 3. Append each selected file to FormData
       formData.images.forEach((file) => {
         dataToSend.append("images", file);
       });
 
+      setLoading(true);
       const res = await fetch(`${BASE_URL}/gems`, {
         method: "POST",
         credentials: "include",
@@ -96,12 +110,14 @@ const CreateGem = ({ onGemCreated }) => {
       if (!res.ok) throw new Error(data.message || "Failed to create Gem");
 
       toast.success("Place added! Now add a review.");
+      setLoading(false);
 
       // Pass ID and Name back to the Wizard
       onGemCreated(data.result._id || data._id, formData.name);
     } catch (err) {
       console.error("Error creating gem:", err);
       toast.error(err?.response?.data?.error || "Something went wrong");
+      setLoading(false);
     }
   };
 
@@ -136,7 +152,7 @@ const CreateGem = ({ onGemCreated }) => {
             <label className="block font-medium">
               {t("Information-l2")} <span className="text-red-500">*</span>
             </label>
-            <input
+            {/* <input
               type="text"
               name="gemLocation"
               value={formData.gemLocation}
@@ -146,14 +162,19 @@ const CreateGem = ({ onGemCreated }) => {
                   ? "border-red-500 bg-red-50"
                   : "border-gray-300"
               }`}
-            />
-            {errors.gemLocation && (
+            /> */}
+            {/* {errors.gemLocation && (
               <p className="text-red-500 text-xs mt-1">{errors.gemLocation}</p>
-            )}
+            )} */}
           </div>
 
           <div>
-            <LocationPicker />
+            <LocationPicker
+            setLocation={handleGemLocation}
+            position={formData.position} setPosition={handlePositionChange}/>
+            {errors.gemLocation && (
+              <p className="text-red-500 text-xs mt-1">{errors.position}</p>
+            )}
           </div>
 
           <div>
@@ -222,7 +243,7 @@ const CreateGem = ({ onGemCreated }) => {
         type="submit"
         className="bg-[#DD0303] text-white px-6 py-2 rounded mt-6 ml-auto block cursor-pointer hover:bg-red-700 transition"
       >
-        {t("btn")}
+        {loading ? "Adding place... " : t("btn")}
       </button>
     </form>
   );
