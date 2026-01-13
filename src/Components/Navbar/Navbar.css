@@ -102,6 +102,10 @@
   fill: #ffffff !important;
 }
 
+.sticky .navbar-links li a:hover {
+  color: white;
+  transition: color .4s;
+}
 /* Search & Icons */
 .dark-mode .search-box,
 .dark-mode .mobile-search,
